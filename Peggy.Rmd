@@ -1,0 +1,12 @@
+---
+title: "Peggy"
+output: html_document
+---
+
+```{r}
+library(SASxport)
+```
+```{r}
+nhanes_mental = read.xport("DPQ_I_nhanes_mental.XPT")
+```
+
