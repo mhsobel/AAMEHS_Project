@@ -3,10 +3,40 @@ title: "Peggy"
 output: html_document
 ---
 
-```{r}
+```{r, include = FALSE}
 library(SASxport)
+library(tidyverse)
+library(ggplot2)
 ```
+
+
+# Read in data
+
+0 Not at all
+1 Several days
+2 More than half the days
+3 Nearly every day
+7 Refused
+9 Don't know
+. Missing
+
 ```{r}
-nhanes_mental = read.xport("DPQ_I_nhanes_mental.XPT")
+nhanes1516 = read.xport("DPQ_I_nhanes_mental.XPT")
+nhanes1516[] <- lapply(nhanes1516, unclass)
+nhanes.df = data.frame(nhanes1516)
+```
+
+
+# Exploratory analyses
+
+```{r}
+dpq010.plot = 
+  nhanes.df %>% 
+  filter(DPQ010 != 7, DPQ010 != 9) %>% 
+  ggplot(., aes(x = DPQ010)) +
+  geom_bar()
+
+dpq010.plot
+  
 ```
 
